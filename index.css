@@ -1,0 +1,9 @@
+body{
+    background-color: blue;
+}
+
+
+#personal_picture{
+    width:155%;
+    -webkit-transform: rotate(90deg);
+}
