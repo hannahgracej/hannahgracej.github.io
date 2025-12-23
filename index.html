@@ -20,67 +20,88 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
-    <link rel="stylesheet" type="text/css" href="jumbotron.css">
 
     <link rel="stylesheet" href="index.css">
 
     <!-- This is a link to a JavaScript program -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- React + Babel for client-side JSX rendering -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
 
   <!-- The body contains the structure of the page -->
   <body>
+    <div id="root"></div>
 
-    <!-- This is the code for the navbar, currently it just displays text but you can put links to other pages here -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Grace Jensen</a>
+    <script type="text/babel">
+      const SocialCard = ({ title, text, href, buttonText }) => (
+        <div className="col-sm-6 col-md-4">
+          <h2>{title}</h2>
+          <p>{text}</p>
+          <p>
+            <a className="btn btn-default" href={href} role="button" target="_blank" rel="noopener noreferrer">
+              {buttonText}
+            </a>
+          </p>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
+      );
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <div class="col-md-8">
-          <h1>Hello, world!</h1>
-          <p>My name is Hannah Grace Jensen. I'm a junior studying computer science at Vanderbilt. I just spent the semester studying abroad in Shanghai and Cape Town! If you want to know more about me, checkout my resume!</p>
-          <p><a class="btn btn-primary btn-lg" href="resume.html" role="button">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-3" >
-          <!-- Here is an example of an image with some in line styling -->
-          <img id="personal_picture" src="IMG_3706.jpg" >
-        </div>
+      const App = () => (
+        <div>
+          <nav className="navbar navbar-inverse navbar-fixed-top">
+            <div className="container">
+              <div className="navbar-header">
+                <a className="navbar-brand" href="#">Grace Jensen</a>
+              </div>
+              <div id="navbar" className="navbar-collapse collapse" />
+            </div>
+          </nav>
 
-      </div>
-    </div>
+          <div className="jumbotron" style={{ marginTop: 50 }}>
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-7">
+                  <h1>Hello, world!</h1>
+                  <p>
+                    My name is Hannah Grace Jensen. I'm a junior studying computer science at Vanderbilt. I just spent the semester studying abroad in Shanghai and Cape Town! If you want to know more about me, checkout my resume!
+                  </p>
+                  <p>
+                    <a className="btn btn-primary btn-lg" href="resume.html" role="button">
+                      Learn more &raquo;
+                    </a>
+                  </p>
+                </div>
+                <div className="col-sm-5">
+                  <img id="personal_picture" src="tolmiepeak.jpg" alt="Hannah Grace Jensen at Tolmie Peak" />
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <!-- This is the code for the main part of the page that contains links in the form of buttons-->
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Find me on Facebook!</h2>
-          <p>Here you can get a closer look at how I live my day to day life. </p>
-          <p><a class="btn btn-default" href="https://www.facebook.com/grace.jensen.716" role="button">View profile!</a></p>
+          <div className="container">
+            <div className="row">
+              <SocialCard
+                title="Connect with me on LinkedIn!"
+                text="Connect with me so we can both expand our professional networks."
+                href="https://www.linkedin.com/in/hannah-grace-jensen-649838a4/"
+                buttonText="View profile!"
+              />
+              <SocialCard
+                title="Follow me on Instagram"
+                text="Checkout the photos of my life."
+                href="https://www.instagram.com/hgjensen/?hl=en/"
+                buttonText="View profile!"
+              />
+            </div>
+          </div>
         </div>
-        <div class="col-md-4">
-          <h2>Follow me on Instagram!</h2>
-          <p>Checkout the photos of my life.</p>
-          <p><a class="btn btn-default" href="https://www.instagram.com/hgjensen/?hl=en/" role="button">View profile!</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Connect with me on LinkedIn!</h2>
-          <p>Connect with me so we can both expand our professional networks.</p>
-          <p><a class="btn btn-default" href="https://www.linkedin.com/in/hannah-grace-jensen-649838a4/" role="button">View profile!</a></p>
-        </div>
-      </div>
+      );
 
-    </div> <!-- /container -->
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
   </body>
 </html>
