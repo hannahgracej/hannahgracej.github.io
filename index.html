@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"> 
   <head>
-    <!-- Meta data is a set of data that describes and gives information about your page -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
@@ -32,7 +30,6 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
 
-  <!-- The body contains the structure of the page -->
   <body>
     <div id="root"></div>
 
@@ -49,56 +46,77 @@
         </div>
       );
 
-      const App = () => (
-        <div>
-          <nav className="navbar navbar-inverse navbar-fixed-top">
-            <div className="container">
-              <div className="navbar-header">
-                <a className="navbar-brand" href="#">Grace Jensen</a>
-              </div>
-              <div id="navbar" className="navbar-collapse collapse" />
-            </div>
-          </nav>
+      const App = () => {
+        const getInitialTheme = () =>
+          localStorage.getItem('theme') ||
+          (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-          <div className="jumbotron" style={{ marginTop: 50 }}>
+        const [theme, setTheme] = React.useState(getInitialTheme());
+
+        React.useEffect(() => {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+        }, [theme]);
+
+        return (
+          <div>
+            <nav className="navbar navbar-inverse navbar-fixed-top">
+              <div className="container">
+                <div className="navbar-header">
+                  <a className="navbar-brand" href="#">Grace Jensen</a>
+                </div>
+                <div id="navbar" className="navbar-collapse collapse">
+                  <button
+                    className="btn btn-default navbar-btn navbar-right"
+                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    aria-label="Toggle color theme"
+                  >
+                    {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                  </button>
+                </div>
+              </div>
+            </nav>
+
+            <div className="jumbotron" style={{ marginTop: 50 }}>
+              <div className="container">
+                <div className="row">
+                  <div className="col-sm-7">
+                    <h1>Hello, world!</h1>
+                    <p>
+                      My name is Grace Jensen. I'm a software engineer, currently based in Seattle. I love full-stack development and being outside! If you want to know more about me, checkout my resume!
+                    </p>
+                    <p>
+                      <a className="btn btn-primary btn-lg" href="resume.html" role="button">
+                        Learn more &raquo;
+                      </a>
+                    </p>
+                  </div>
+                  <div className="col-sm-5">
+                    <img id="personal_picture" src="tolmiepeak.jpg" alt="Hannah Grace Jensen at Tolmie Peak" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="container">
               <div className="row">
-                <div className="col-sm-7">
-                  <h1>Hello, world!</h1>
-                  <p>
-                    My name is Grace Jensen. I'm a software engineer, currently based in Seattle. I love full-stack development and being outside! If you want to know more about me, checkout my resume!
-                  </p>
-                  <p>
-                    <a className="btn btn-primary btn-lg" href="resume.html" role="button">
-                      Learn more &raquo;
-                    </a>
-                  </p>
-                </div>
-                <div className="col-sm-5">
-                  <img id="personal_picture" src="tolmiepeak.jpg" alt="Hannah Grace Jensen at Tolmie Peak" />
-                </div>
+                <SocialCard
+                  title="Connect with me on LinkedIn!"
+                  text="Connect with me so we can both expand our professional networks."
+                  href="https://www.linkedin.com/in/hannah-grace-jensen-649838a4/"
+                  buttonText="View profile!"
+                />
+                <SocialCard
+                  title="Follow me on Strava"
+                  text="I love hiking in the PNW"
+                  href="https://www.strava.com/athletes/57961316"
+                  buttonText="View profile!"
+                />
               </div>
             </div>
           </div>
-
-          <div className="container">
-            <div className="row">
-              <SocialCard
-                title="Connect with me on LinkedIn!"
-                text="Connect with me so we can both expand our professional networks."
-                href="https://www.linkedin.com/in/hannah-grace-jensen-649838a4/"
-                buttonText="View profile!"
-              />
-              <SocialCard
-                title="Follow me on Strava"
-                text="I love hiking in the PNW"
-                href="https://www.strava.com/athletes/57961316"
-                buttonText="View profile!"
-              />
-            </div>
-          </div>
-        </div>
-      );
+        );
+      }
 
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);

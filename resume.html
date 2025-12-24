@@ -6,6 +6,13 @@
   <link rel="stylesheet" href="index.css" type="text/css">
   </head>
   <body>
-    <iframe id="resume" src="https://drive.google.com/file/d/1vXvKcARZ_nqLBGyMblcGq2NXpfMPgF4K/view?usp=sharing" width="480" height="620"></iframe>
+        <iframe id="resume" src="https://drive.google.com/file/d/1vXvKcARZ_nqLBGyMblcGq2NXpfMPgF4K/view?usp=sharing" width="480" height="620"></iframe>
+    <script>
+      // Apply stored theme so this page matches the homepage
+      (function() {
+        var theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </body>
 </html>
